@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="621.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bd4.bdp4.VisualInterface">
+   <children>
+      <Label layoutX="161.0" layoutY="14.0" text="Crear Base De Datos y Tablas">
+         <font>
+            <Font name="Arial Bold" size="21.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tableName" layoutX="97.0" layoutY="94.0" promptText="Nombre De Tabla" />
+      <Button fx:id="createTableBtn" layoutX="133.0" layoutY="408.0" mnemonicParsing="false" onAction="#onCreateTableBtn" text="Create Table" />
+      <Label layoutX="16.0" layoutY="135.0" text="Nombre Atributo" />
+      <Label layoutX="139.0" layoutY="135.0" text="Tipo Atributo" />
+      <Label layoutX="253.0" layoutY="135.0" text="Constraints" />
+      <TextArea fx:id="atributesTextArea" layoutX="16.0" layoutY="164.0" prefHeight="225.0" prefWidth="311.0" promptText="id int auto_increment Primary Key" />
+      <Label layoutX="90.0" layoutY="39.0" prefHeight="45.0" prefWidth="446.0" text="Separa los Atributos por saltos de Linea y los valores del atributo por espacios " underline="true" />
+   </children>
+</AnchorPane>
