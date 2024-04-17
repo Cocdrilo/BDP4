@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="621.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bd4.bdp4.VisualInterface">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bd4.bdp4.VisualInterface">
    <children>
       <Label layoutX="161.0" layoutY="14.0" text="Crear Base De Datos y Tablas">
          <font>
@@ -22,5 +21,8 @@
       <Label layoutX="253.0" layoutY="135.0" text="Constraints" />
       <TextArea fx:id="atributesTextArea" layoutX="16.0" layoutY="164.0" prefHeight="225.0" prefWidth="311.0" promptText="id int auto_increment Primary Key" />
       <Label layoutX="90.0" layoutY="39.0" prefHeight="45.0" prefWidth="446.0" text="Separa los Atributos por saltos de Linea y los valores del atributo por espacios " underline="true" />
+      <Label fx:id="errorLabel1" layoutX="338.0" layoutY="182.0" opacity="0.0" prefHeight="49.0" prefWidth="280.0" styleClass="warning" stylesheets="@../../../css/FormularyStyleSheet.css" />
+      <Label fx:id="errorLabel2" layoutX="338.0" layoutY="252.0" opacity="0.0" prefHeight="49.0" prefWidth="280.0" styleClass="warning" stylesheets="@../../../css/FormularyStyleSheet.css" />
+      <Label fx:id="errorLabel3" layoutX="338.0" layoutY="323.0" opacity="0.0" prefHeight="56.0" prefWidth="280.0" styleClass="warning" stylesheets="@../../../css/FormularyStyleSheet.css" />
    </children>
 </AnchorPane>
