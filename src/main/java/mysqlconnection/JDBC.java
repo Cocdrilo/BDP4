@@ -1,6 +1,5 @@
-package com.mysqlconnection;
+package mysqlconnection;
 
-import edu.shadowauction.shadowauction.Usuario;
 import javafx.scene.input.Dragboard;
 
 import java.sql.*;
