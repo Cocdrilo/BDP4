@@ -6,9 +6,9 @@ import java.sql.*;
 
 public class JDBC {
 
-    public static String url_db = "jdbc:mysql://localhost:3306/sadb_schema";
-    public static String user_db = "root";
-    public static String password_db= "240103";
+    public static String url_db = "jdbc:mysql://localhost:3306/agenda";
+    public static String user_db = "agenda";
+    public static String password_db= "agenda";
 
     public static boolean register(String username, String lastname, String email, String userpassword){
         try{
