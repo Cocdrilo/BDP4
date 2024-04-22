@@ -1,7 +1,6 @@
 module edu.bd4.bdp4 {
     requires javafx.controls;
     requires javafx.fxml;
-    requires javafx.media;
     requires java.sql;
 
 

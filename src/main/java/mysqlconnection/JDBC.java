@@ -3,6 +3,9 @@ package mysqlconnection;
 import javafx.scene.input.Dragboard;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class JDBC {
 
@@ -96,5 +99,65 @@ public class JDBC {
             e.printStackTrace(System.err);
         }
         return null;
+    }
+
+
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Pedir al usuario que ingrese el nombre de la tabla
+        System.out.print("Ingrese el nombre de la tabla: ");
+        String nombreTabla = scanner.nextLine();
+
+        // Pedir al usuario que ingrese los atributos de la tabla con restricciones
+        ArrayList<String> atributos = new ArrayList<>();
+        boolean continuar = true;
+        while (continuar) {
+            System.out.print("Ingrese un atributo (nombre tipo_dato restricciones) o escriba 'fin' para terminar: ");
+            String entrada = scanner.nextLine();
+            if (entrada.equalsIgnoreCase("fin")) {
+                continuar = false;
+            } else {
+                atributos.add(entrada+", ");
+            }
+        }
+
+        // Eliminar la coma del último elemento del ArrayList
+        if (!atributos.isEmpty()) {
+            String ultimoAtributo = atributos.get(atributos.size() - 1);
+            ultimoAtributo = ultimoAtributo.substring(0, ultimoAtributo.length() - 2); // Eliminar coma y espacio
+            atributos.set(atributos.size() - 1, ultimoAtributo);
+        }
+
+        System.out.println(atributos);
+        createTable(nombreTabla, atributos);
+    }
+        public static void createTable(String nombre, ArrayList<String> atributos){
+        try {
+            // Establecer conexión con la base de datos
+            Connection conexion = DriverManager.getConnection(url_db, user_db, password_db);
+
+            // Crear una sentencia SQL para crear la tabla
+            Statement sentencia = conexion.createStatement();
+
+
+            // Definir la sentencia SQL para crear la tabla
+            String sql = "CREATE TABLE IF NOT EXISTS " + nombre + " ("
+                    + atributos
+                    + ")";
+
+            // Ejecutar la sentencia SQL
+            sentencia.executeUpdate(sql);
+
+            // Cerrar la conexión y la sentencia
+            sentencia.close();
+            conexion.close();
+
+            System.out.println("Tabla creada exitosamente.");
+
+        } catch (SQLException e) {
+            System.out.println("Error al crear la tabla: " + e.getMessage());
+        }
     }
 }
