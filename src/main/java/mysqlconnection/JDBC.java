@@ -138,15 +138,24 @@ public class JDBC {
             // Establecer conexión con la base de datos
             Connection conexion = DriverManager.getConnection(url_db, user_db, password_db);
 
+            // Unir los atributos en una cadena
+            String atributosString = String.join(" ", atributos);
+
+            // Eliminar las comas adicionales y los espacios antes de ejecutar la consulta
+            atributosString = atributosString.replaceAll(",\\s+", ",");
+
             // Crear una sentencia SQL para crear la tabla
             Statement sentencia = conexion.createStatement();
 
 
             // Definir la sentencia SQL para crear la tabla
             String sql = "CREATE TABLE IF NOT EXISTS " + nombre + " ("
-                    + atributos
+                    + atributosString
                     + ")";
 
+            for(int i = 0;i<atributos.size();i++){
+                System.out.println(atributos.get(i));
+            }
             // Ejecutar la sentencia SQL
             sentencia.executeUpdate(sql);
 
