@@ -6,6 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class JDBC {
 
@@ -104,9 +105,10 @@ public class JDBC {
 
 
     public static void main(String[] args) {
-        String tableName = "test2";
-        String[] data = {"1", "2"}; //en este caso la tabla tiene dos valores int sino da error
-        JDBC.insertData(tableName, data);
+        List<String> tablesInfo = JDBC.getTablesAndAttributes();
+        for (String tableInfo : tablesInfo) {
+            System.out.println(tableInfo);
+        }
     }
         public static void createTable(String nombre, ArrayList<String> atributos){
         try {
@@ -146,6 +148,41 @@ public class JDBC {
     }
 
     //funcion para devolver las tablas y sus atributos
+    public static List<String> getTablesAndAttributes() {
+        List<String> tablesInfo = new ArrayList<>();
+
+        try {
+            // Establecer conexión con la base de datos
+            Connection connection = DriverManager.getConnection(url_db, user_db, password_db);
+            DatabaseMetaData metaData = connection.getMetaData();
+
+            // Obtener los nombres de las tablas
+            ResultSet tablesResultSet = metaData.getTables(null, null, null, new String[]{"TABLE"});
+            while (tablesResultSet.next()) {
+                String tableName = tablesResultSet.getString("TABLE_NAME");
+                List<String> attributes = new ArrayList<>();
+
+                // Obtener los atributos de cada tabla
+                ResultSet columnsResultSet = metaData.getColumns(null, null, tableName, null);
+                while (columnsResultSet.next()) {
+                    String columnName = columnsResultSet.getString("COLUMN_NAME");
+                    String columnType = columnsResultSet.getString("TYPE_NAME");
+                    attributes.add(columnName + " " + columnType);
+                }
+                columnsResultSet.close();
+
+                // Unir los atributos en una cadena y agregarlos a la lista de información de la tabla
+                String attributesString = String.join(", ", attributes);
+                tablesInfo.add(tableName + ": " + attributesString);
+            }
+            tablesResultSet.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return tablesInfo;
+    }
     //funcion para insertar un dato concreto en una tabla concreta
     public static boolean insertData(String tableName, String... data) {
         try {
