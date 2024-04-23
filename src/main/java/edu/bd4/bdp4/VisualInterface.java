@@ -4,9 +4,12 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.PopupWindow;
 import javafx.util.Duration;
 import mysqlconnection.JDBC;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -23,6 +26,9 @@ public class VisualInterface {
     private Label errorLabel2;
     @FXML
     private Label errorLabel3;
+    @FXML
+    private AnchorPane anchorPane;
+    private FadeUtilityClass fadeUtilityClass = new FadeUtilityClass();
 
     public VisualInterface() {
     }
@@ -133,6 +139,12 @@ public class VisualInterface {
             return "true";
         }
         return "0";
+    }
+
+    @FXML
+    private void goNextScreen() throws IOException {
+        //Funcion que me lleva al fxml SecondFunctions.fxml
+        fadeUtilityClass.fadeNextScene(anchorPane, 2, "SecondFunctions.fxml");
     }
 
 
