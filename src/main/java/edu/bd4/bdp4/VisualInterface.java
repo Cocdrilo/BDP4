@@ -78,7 +78,7 @@ public class VisualInterface {
                 changeOpacityOnAndOff(errorLabel2);
             }
 
-// Check restrictions
+            // Check restrictions
             for (int i = 2; i < atributeData.length; i++) {
                 if (!Arrays.asList(validRestrictions).contains(atributeData[i].toUpperCase().replaceAll(",", ""))) {
                     errorLabel3.setText("Invalid restriction: " + atributeData[i] + " from " +contador + " Atribute" );
@@ -90,6 +90,52 @@ public class VisualInterface {
 
         }
     }
+
+    @FXML
+    private void fillTableDefaultValues() {
+        ArrayList <String> Atributes = new ArrayList<>();
+        ArrayList <String> Data = new ArrayList<>();
+        //Funcion que me de las tablas con sus atributos
+        //Atributes = JDBC.getTablesAtributes();
+        for (String atribute : Atributes) {
+            Data.add(checkAndFillAtribute(atribute));
+        }
+        //Funcion que devuelva los datos de la tabla
+        //JDBC.insertData(Data);
+    }
+
+    private String checkAndFillAtribute(String atribute){
+        if (atribute.equals("INT")){
+            return "1";
+        }
+        if (atribute.equals("VARCHAR")){
+            return "DefaultVchar";
+        }
+        if (atribute.equals("TEXT")){
+            return "DefaultText";
+        }
+        if (atribute.equals("DATE")){
+            return "2021-05-05";
+        }
+        if (atribute.equals("TIMESTAMP")){
+            return "2021-05-05 12:00:00";
+        }
+        if (atribute.equals("FLOAT")){
+            return "1.0";
+        }
+        if (atribute.equals("DOUBLE")){
+            return "1.00";
+        }
+        if (atribute.equals("DECIMAL")){
+            return "1.0";
+        }
+        if (atribute.equals("BOOLEAN")){
+            return "true";
+        }
+        return "0";
+    }
+
+
 
     private void changeOpacityOnAndOff(Label label) {
         label.setOpacity(1);
