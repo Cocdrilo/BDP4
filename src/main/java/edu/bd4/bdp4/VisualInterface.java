@@ -5,6 +5,7 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.Duration;
+import mysqlconnection.JDBC;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,18 +33,28 @@ public class VisualInterface {
         String tableNameString = tableName.getText();
         ArrayList <String> Tabla = generateAtributesArrayList();
         checkAtributes(Tabla);
-        //JDBC.createTable(tableNameString, Tabla);
+        JDBC.createTable(tableNameString, Tabla);
     }
 
     private ArrayList<String> generateAtributesArrayList() {
         ArrayList<String> atributes = new ArrayList<>();
         String textAreaData = atributesTextArea.getText(); // Obtener los datos del TextArea
-        String[] lines = textAreaData.split("\n"); // Dividir la cadena por saltos de línea
 
-        // Agregar cada línea al ArrayList de atributos
+        // Dividir el texto del TextArea por saltos de línea
+        String[] lines = textAreaData.split("\n");
+
+        // Iterar sobre cada línea y agregar su contenido seguido de una coma y un espacio al ArrayList
         for (String line : lines) {
-            atributes.add(line.trim()); // trim() para eliminar espacios en blanco adicionales al principio y al final de cada línea
+            atributes.add(line.trim() + ", ");
         }
+
+        // Si prefieres que la última línea no termine con una coma y un espacio, puedes eliminarlos así:
+        if (!atributes.isEmpty()) {
+            String lastElement = atributes.get(atributes.size() - 1);
+            atributes.set(atributes.size() - 1, lastElement.substring(0, lastElement.length() - 2)); // Eliminar la coma y el espacio del último elemento
+        }
+
+        System.out.println(atributes);
         return atributes;
     }
     private void checkAtributes(ArrayList<String> atributes) {
@@ -56,25 +67,27 @@ public class VisualInterface {
             String[] atributeData = atribute.split(" ");
 
             // Check attribute name
-            if (!atributeData[0].matches("[a-zA-Z]+")) {
+            if (!atributeData[0].matches("[a-zA-Z]+([0-9]+)?")) {
                 errorLabel1.setText("Invalid attribute name: " + atributeData[0] + " from " +contador + "º Atribute" );
                 changeOpacityOnAndOff(errorLabel1);
             }
 
             // Check data type
-            if (!Arrays.asList(validDataTypes).contains(atributeData[1].toUpperCase())) {
-                errorLabel2.setText("Invalid data type: " + atributeData[1] + "from " +contador + " Atribute" );
+            if (!Arrays.asList(validDataTypes).contains(atributeData[1].toUpperCase().replaceAll(",", ""))) {
+                errorLabel2.setText("Invalid data type: " + atributeData[1] + " from " +contador + " Atribute" );
                 changeOpacityOnAndOff(errorLabel2);
             }
 
-            // Check restrictions
+// Check restrictions
             for (int i = 2; i < atributeData.length; i++) {
-                if (!Arrays.asList(validRestrictions).contains(atributeData[i].toUpperCase())) {
-                    errorLabel3.setText("Invalid restriction: " + atributeData[i] + "from " +contador + " Atribute" );
+                if (!Arrays.asList(validRestrictions).contains(atributeData[i].toUpperCase().replaceAll(",", ""))) {
+                    errorLabel3.setText("Invalid restriction: " + atributeData[i] + " from " +contador + " Atribute" );
                     changeOpacityOnAndOff(errorLabel3);
                     break;
                 }
             }
+
+
         }
     }
 
