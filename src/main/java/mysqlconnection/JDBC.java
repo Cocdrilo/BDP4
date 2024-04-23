@@ -104,34 +104,9 @@ public class JDBC {
 
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        // Pedir al usuario que ingrese el nombre de la tabla
-        System.out.print("Ingrese el nombre de la tabla: ");
-        String nombreTabla = scanner.nextLine();
-
-        // Pedir al usuario que ingrese los atributos de la tabla con restricciones
-        ArrayList<String> atributos = new ArrayList<>();
-        boolean continuar = true;
-        while (continuar) {
-            System.out.print("Ingrese un atributo (nombre tipo_dato restricciones) o escriba 'fin' para terminar: ");
-            String entrada = scanner.nextLine();
-            if (entrada.equalsIgnoreCase("fin")) {
-                continuar = false;
-            } else {
-                atributos.add(entrada+", ");
-            }
-        }
-
-        // Eliminar la coma del último elemento del ArrayList
-        if (!atributos.isEmpty()) {
-            String ultimoAtributo = atributos.get(atributos.size() - 1);
-            ultimoAtributo = ultimoAtributo.substring(0, ultimoAtributo.length() - 2); // Eliminar coma y espacio
-            atributos.set(atributos.size() - 1, ultimoAtributo);
-        }
-
-        System.out.println(atributos);
-        createTable(nombreTabla, atributos);
+        String tableName = "test2";
+        String[] data = {"1", "2"}; //en este caso la tabla tiene dos valores int sino da error
+        JDBC.insertData(tableName, data);
     }
         public static void createTable(String nombre, ArrayList<String> atributos){
         try {
@@ -167,6 +142,46 @@ public class JDBC {
 
         } catch (SQLException e) {
             System.out.println("Error al crear la tabla: " + e.getMessage());
+        }
+    }
+
+    //funcion para devolver las tablas y sus atributos
+    //funcion para insertar un dato concreto en una tabla concreta
+    public static boolean insertData(String tableName, String... data) {
+        try {
+            // Establecer conexión con la base de datos
+            Connection connection = DriverManager.getConnection(url_db, user_db, password_db);
+
+            // Construir la consulta SQL para la inserción de datos
+            StringBuilder sql = new StringBuilder("INSERT INTO ").append(tableName).append(" VALUES (");
+            for (int i = 0; i < data.length; i++) {
+                sql.append("?");
+                if (i < data.length - 1) {
+                    sql.append(",");
+                }
+            }
+            sql.append(")");
+
+            // Crear la declaración preparada
+            PreparedStatement preparedStatement = connection.prepareStatement(sql.toString());
+
+            // Establecer los valores de los parámetros
+            for (int i = 0; i < data.length; i++) {
+                preparedStatement.setString(i + 1, data[i]);
+            }
+
+            // Ejecutar la consulta
+            preparedStatement.executeUpdate();
+
+            // Cerrar la conexión y la declaración preparada
+            preparedStatement.close();
+            connection.close();
+
+            System.out.println("Datos insertados en la tabla '" + tableName + "' exitosamente.");
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error al insertar datos en la tabla '" + tableName + "': " + e.getMessage());
+            return false;
         }
     }
 }
