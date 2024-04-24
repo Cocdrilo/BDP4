@@ -105,10 +105,11 @@ public class JDBC {
 
 
     public static void main(String[] args) {
-        List<String> tablesInfo = JDBC.getTablesAndAttributes();
-        for (String tableInfo : tablesInfo) {
-            System.out.println(tableInfo);
-        }
+        ArrayList<Object> data = new ArrayList<>();
+        data.add("3");
+        data.add("4");
+        insertData("test2", data);
+
     }
         public static void createTable(String nombre, ArrayList<String> atributos){
         try {
@@ -184,16 +185,16 @@ public class JDBC {
         return tablesInfo;
     }
     //funcion para insertar un dato concreto en una tabla concreta
-    public static boolean insertData(String tableName, String... data) {
+    public static boolean insertData(String tableName, ArrayList<Object> data) {
         try {
             // Establecer conexión con la base de datos
             Connection connection = DriverManager.getConnection(url_db, user_db, password_db);
 
             // Construir la consulta SQL para la inserción de datos
             StringBuilder sql = new StringBuilder("INSERT INTO ").append(tableName).append(" VALUES (");
-            for (int i = 0; i < data.length; i++) {
+            for (int i = 0; i < data.size(); i++) {
                 sql.append("?");
-                if (i < data.length - 1) {
+                if (i < data.size() - 1) {
                     sql.append(",");
                 }
             }
@@ -203,8 +204,8 @@ public class JDBC {
             PreparedStatement preparedStatement = connection.prepareStatement(sql.toString());
 
             // Establecer los valores de los parámetros
-            for (int i = 0; i < data.length; i++) {
-                preparedStatement.setString(i + 1, data[i]);
+            for (int i = 0; i < data.size(); i++) {
+                preparedStatement.setObject(i + 1, data.get(i));
             }
 
             // Ejecutar la consulta
