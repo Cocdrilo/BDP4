@@ -104,8 +104,10 @@ public class JDBC {
 
 
     public static void main(String[] args) {
-       updatePhoneNumber("persona", "telefono", "5551111", "idPersona", 124);
-
+        List<String> usuariosConCEnDepartamento = JDBC.getUsersWithNamesStartingWithCAndDepartment("PERSONA", "Marketing");
+        for (String usuario : usuariosConCEnDepartamento) {
+            System.out.println(usuario);
+        }
     }
 
     public static void createTable(String nombre, ArrayList<String> atributos) {
@@ -294,6 +296,73 @@ public class JDBC {
             return false;
         }
     }
+
+    //funcion para mostrar todos los nombre que empiecen por "A"
+    public static List<String> getUsersWithNamesStartingWithA(String tableName) {
+        List<String> users = new ArrayList<>();
+        try {
+            // Establecer conexión con la base de datos
+            Connection connection = DriverManager.getConnection(url_db, user_db, password_db);
+
+            // Construir la consulta SQL para obtener los usuarios
+            String sql = "SELECT * FROM " + tableName + " WHERE nombre LIKE 'A%'";
+
+            // Crear la declaración
+            Statement statement = connection.createStatement();
+
+            // Ejecutar la consulta
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            // Iterar sobre los resultados y añadir los nombres de usuario a la lista
+            while (resultSet.next()) {
+                String nombre = resultSet.getString("nombre");
+                users.add(nombre);
+            }
+
+            // Cerrar la conexión y el statement
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("Error al obtener usuarios: " + e.getMessage());
+        }
+        return users;
+    }
+
+    //funcion para mostrar los nombres que empiecen por c y esten en un departamento dado
+    public static List<String> getUsersWithNamesStartingWithCAndDepartment(String tableName, String departmentName) {
+        List<String> users = new ArrayList<>();
+        try {
+            // Establecer conexión con la base de datos
+            Connection connection = DriverManager.getConnection(url_db, user_db, password_db);
+
+            // Construir la consulta SQL para obtener los usuarios
+            String sql = "SELECT p.nombre " +
+                    "FROM " + tableName + " p " +
+                    "INNER JOIN DEPARTAMENTO d ON p.idDepartamento = d.idDepartamento " +
+                    "WHERE p.nombre LIKE 'C%' AND d.Nombre_departamento = ?";
+
+            // Crear la declaración preparada
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, departmentName);
+
+            // Ejecutar la consulta
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Iterar sobre los resultados y añadir los nombres de usuario a la lista
+            while (resultSet.next()) {
+                String nombre = resultSet.getString("nombre");
+                users.add(nombre);
+            }
+
+            // Cerrar la conexión y la declaración preparada
+            preparedStatement.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("Error al obtener usuarios: " + e.getMessage());
+        }
+        return users;
+    }
+
 
 }
 
