@@ -14,6 +14,7 @@ public class    HelloApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 1080, 1080);
         stage.setTitle("BaseDeDatosPractica4!");
         stage.setScene(scene);
+        stage.setMaximized(true);
         stage.show();
         stage.setMinHeight(605);
         stage.setMinWidth(804);

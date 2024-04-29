@@ -12,12 +12,12 @@ public class JDBC {
 
     public static String url_db = "jdbc:mysql://localhost:3306/agenda";
     public static String user_db = "agenda";
-    public static String password_db= "agenda";
+    public static String password_db = "agenda";
 
-    public static boolean register(String username, String lastname, String email, String userpassword){
-        try{
+    public static boolean register(String username, String lastname, String email, String userpassword) {
+        try {
 
-            if(!checkUser(username)){
+            if (!checkUser(username)) {
                 Connection connection = DriverManager.getConnection(url_db, user_db, password_db);
 
                 PreparedStatement insertUser = connection.prepareStatement(
@@ -32,50 +32,50 @@ public class JDBC {
                 insertUser.executeUpdate();
                 return true;
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace(System.err);
         }
         return false;
     }
 
-    public static boolean checkUser(String email){
+    public static boolean checkUser(String email) {
         try {
-            Connection connection = DriverManager.getConnection(url_db,user_db,password_db);
+            Connection connection = DriverManager.getConnection(url_db, user_db, password_db);
 
             PreparedStatement checkUserExists = connection.prepareStatement(
                     "SELECT * FROM USERS WHERE EMAIL = ?"
             );
-            checkUserExists.setString(1,email);
+            checkUserExists.setString(1, email);
 
             ResultSet resultSet = checkUserExists.executeQuery();
 
-            if(!resultSet.isBeforeFirst()){
+            if (!resultSet.isBeforeFirst()) {
                 return false;
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace(System.err);
         }
 
         return true;
     }
 
-    public static boolean validateLogin(String email, String userpassword){
+    public static boolean validateLogin(String email, String userpassword) {
         try {
-            Connection connection = DriverManager.getConnection(url_db,user_db,password_db);
+            Connection connection = DriverManager.getConnection(url_db, user_db, password_db);
 
             PreparedStatement validateUser = connection.prepareStatement(
                     "SELECT * FROM USERS WHERE EMAIL = ? AND PASSWORD = ?"
             );
 
-            validateUser.setString(1,email);
-            validateUser.setString(2,userpassword);
+            validateUser.setString(1, email);
+            validateUser.setString(2, userpassword);
 
             ResultSet resultSet = validateUser.executeQuery();
 
-            if(!resultSet.isBeforeFirst()){
+            if (!resultSet.isBeforeFirst()) {
                 return false;
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace(System.err);
         }
         return true;
@@ -103,15 +103,12 @@ public class JDBC {
     }
 
 
-
     public static void main(String[] args) {
-        ArrayList<Object> data = new ArrayList<>();
-        data.add("3");
-        data.add("4");
-        insertData("test2", data);
+       updatePhoneNumber("persona", "telefono", "5551111", "idPersona", 124);
 
     }
-        public static void createTable(String nombre, ArrayList<String> atributos){
+
+    public static void createTable(String nombre, ArrayList<String> atributos) {
         try {
             // Establecer conexión con la base de datos
             Connection conexion = DriverManager.getConnection(url_db, user_db, password_db);
@@ -131,7 +128,7 @@ public class JDBC {
                     + atributosString
                     + ")";
 
-            for(int i = 0;i<atributos.size();i++){
+            for (int i = 0; i < atributos.size(); i++) {
                 System.out.println(atributos.get(i));
             }
             // Ejecutar la sentencia SQL
@@ -184,6 +181,7 @@ public class JDBC {
 
         return tablesInfo;
     }
+
     //funcion para insertar un dato concreto en una tabla concreta
     public static boolean insertData(String tableName, ArrayList<Object> data) {
         try {
@@ -222,4 +220,80 @@ public class JDBC {
             return false;
         }
     }
+
+
+    //funcion para borrar un dato de la tabla persona
+    public static boolean deleteData(String tableName, String columnName, Object value) {
+        try {
+            // Establecer conexión con la base de datos
+            Connection connection = DriverManager.getConnection(url_db, user_db, password_db);
+
+            // Construir la consulta SQL para eliminar datos
+            String sql = "DELETE FROM " + tableName + " WHERE " + columnName + " = ?";
+
+            // Crear la declaración preparada
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            // Establecer el valor del parámetro
+            preparedStatement.setObject(1, value);
+
+            // Ejecutar la consulta
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            // Cerrar la conexión y la declaración preparada
+            preparedStatement.close();
+            connection.close();
+
+            // Verificar si se eliminó alguna fila
+            if (rowsAffected > 0) {
+                System.out.println("Datos eliminados de la tabla '" + tableName + "' exitosamente.");
+                return true;
+            } else {
+                System.out.println("No se encontraron datos para eliminar en la tabla '" + tableName + "'.");
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar datos de la tabla '" + tableName + "': " + e.getMessage());
+            return false;
+        }
+    }
+
+    //funcion para actualizar el telefono de un dato de la tabla persona
+    public static boolean updatePhoneNumber(String tableName, String columnNameToUpdate, Object newValue, String columnNameToIdentify, Object identifierValue) {
+        try {
+            // Establecer conexión con la base de datos
+            Connection connection = DriverManager.getConnection(url_db, user_db, password_db);
+
+            // Construir la consulta SQL para actualizar el teléfono
+            String sql = "UPDATE " + tableName + " SET " + columnNameToUpdate + " = ? WHERE " + columnNameToIdentify + " = ?";
+
+            // Crear la declaración preparada
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            // Establecer los valores de los parámetros
+            preparedStatement.setObject(1, newValue);
+            preparedStatement.setObject(2, identifierValue);
+
+            // Ejecutar la consulta
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            // Cerrar la conexión y la declaración preparada
+            preparedStatement.close();
+            connection.close();
+
+            // Verificar si se actualizaron filas
+            if (rowsAffected > 0) {
+                System.out.println("Teléfono actualizado en la tabla '" + tableName + "' exitosamente.");
+                return true;
+            } else {
+                System.out.println("No se encontraron datos para actualizar en la tabla '" + tableName + "'.");
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar el teléfono en la tabla '" + tableName + "': " + e.getMessage());
+            return false;
+        }
+    }
+
 }
+
