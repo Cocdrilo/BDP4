@@ -104,7 +104,6 @@ public class JDBC {
 
 
     public static void main(String[] args) {
-        insertSampleData();
     }
 
     public static void createTable(String nombre, ArrayList<String> atributos) {
@@ -145,52 +144,6 @@ public class JDBC {
     }
 
     //funcion para devolver las tablas y sus atributos
-    public static void insertSampleData() {
-        // Datos de ejemplo para la tabla "persona"
-        ArrayList<Object> persona1 = new ArrayList<>();
-        persona1.add("John"); // Nombre
-        persona1.add("Doe"); // Apellido
-        persona1.add("john@example.com"); // Correo electrónico
-
-        ArrayList<Object> persona2 = new ArrayList<>();
-        persona2.add("Alice");
-        persona2.add("Smith");
-        persona2.add("alice@example.com");
-
-        // Insertar datos en la tabla "persona"
-        insertData("persona", persona1);
-        insertData("persona", persona2);
-
-        // Datos de ejemplo para la tabla "departamento"
-        ArrayList<Object> departamento1 = new ArrayList<>();
-        departamento1.add("IT"); // Nombre del departamento
-
-        ArrayList<Object> departamento2 = new ArrayList<>();
-        departamento2.add("HR");
-
-        // Insertar datos en la tabla "departamento"
-        insertData("departamento", departamento1);
-        insertData("departamento", departamento2);
-
-        // Datos de ejemplo para la tabla "empleado"
-        ArrayList<Object> empleado1 = new ArrayList<>();
-        empleado1.add("John"); // Nombre del empleado
-        empleado1.add("Doe"); // Apellido del empleado
-        empleado1.add("john@example.com"); // Correo electrónico del empleado
-        empleado1.add(1); // ID del departamento al que pertenece
-
-        ArrayList<Object> empleado2 = new ArrayList<>();
-        empleado2.add("Alice");
-        empleado2.add("Smith");
-        empleado2.add("alice@example.com");
-        empleado2.add(2);
-
-        // Insertar datos en la tabla "empleado"
-        insertData("empleado", empleado1);
-        insertData("empleado", empleado2);
-
-        System.out.println("Datos de ejemplo insertados en todas las tablas.");
-    }
 
 
     //funcion para devolver las tablas y sus atributos
