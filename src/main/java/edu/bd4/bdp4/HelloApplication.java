@@ -11,13 +11,13 @@ public class    HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("VisualInterface.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1080, 1080);
+        Scene scene = new Scene(fxmlLoader.load(), 900, 461);
         stage.setTitle("BaseDeDatosPractica4!");
         stage.setScene(scene);
-        stage.setMaximized(true);
+        stage.setResizable(false);
         stage.show();
-        stage.setMinHeight(605);
-        stage.setMinWidth(804);
+        stage.setMinHeight(461);
+        stage.setMinWidth(900);
     }
 
     public static void main(String[] args) {

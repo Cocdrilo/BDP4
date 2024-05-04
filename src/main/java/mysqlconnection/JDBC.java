@@ -147,8 +147,8 @@ public class JDBC {
 
 
     //funcion para devolver las tablas y sus atributos
-    public static List<String> getTablesAndAttributes() {
-        List<String> tablesInfo = new ArrayList<>();
+    public static ArrayList<String> getTablesAndAttributes() {
+        ArrayList<String> tablesInfo = new ArrayList<>();
 
         try {
             // Establecer conexión con la base de datos
@@ -184,7 +184,7 @@ public class JDBC {
     }
 
     //funcion para insertar un dato concreto en una tabla concreta
-    public static boolean insertData(String tableName, ArrayList<Object> data) {
+    public static boolean insertData(String tableName, ArrayList<String> data) {
         try {
             // Establecer conexión con la base de datos
             Connection connection = DriverManager.getConnection(url_db, user_db, password_db);

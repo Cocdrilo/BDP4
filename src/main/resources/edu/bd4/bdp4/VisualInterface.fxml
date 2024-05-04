@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bd4.bdp4.VisualInterface">
+<AnchorPane fx:id="parentNode" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bd4.bdp4.VisualInterface">
    <children>
       <Label layoutX="161.0" layoutY="14.0" text="Crear Base De Datos y Tablas">
          <font>
@@ -24,5 +24,7 @@
       <Label fx:id="errorLabel1" layoutX="338.0" layoutY="182.0" opacity="0.0" prefHeight="49.0" prefWidth="280.0" styleClass="warning" stylesheets="@../../../css/FormularyStyleSheet.css" />
       <Label fx:id="errorLabel2" layoutX="338.0" layoutY="252.0" opacity="0.0" prefHeight="49.0" prefWidth="280.0" styleClass="warning" stylesheets="@../../../css/FormularyStyleSheet.css" />
       <Label fx:id="errorLabel3" layoutX="338.0" layoutY="323.0" opacity="0.0" prefHeight="56.0" prefWidth="280.0" styleClass="warning" stylesheets="@../../../css/FormularyStyleSheet.css" />
+      <Button layoutX="368.0" layoutY="408.0" mnemonicParsing="false" onAction="#fillTableDefaultValues" text="Fill All Tables Default Values" />
+      <Button layoutX="660.0" layoutY="27.0" mnemonicParsing="false" onAction="#goNextScene" prefHeight="74.0" prefWidth="206.0" text="Pasar al Borrado" />
    </children>
 </AnchorPane>
