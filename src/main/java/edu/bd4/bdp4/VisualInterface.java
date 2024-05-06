@@ -123,7 +123,7 @@ public class VisualInterface {
     private String checkAndFillAttribute(String attributeType){
         return switch (attributeType) {
             case "INT" -> "1";
-            case "VARCHAR" -> "DefaultVchar";
+            case "VARCHAR" -> "Def";
             case "TEXT" -> "DefaultText";
             case "DATE" -> "2021-05-05";
             case "TIMESTAMP" -> "2021-05-05 12:00:00";
