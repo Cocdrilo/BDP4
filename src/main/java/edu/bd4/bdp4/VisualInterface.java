@@ -84,7 +84,7 @@ public class VisualInterface {
             // Check data type
             String dataType = atributeData[1].toUpperCase().replaceAll(",", "");
             if (dataType.startsWith("VARCHAR")) {
-                if (!dataType.matches("VARCHAR\\[\\d+\\]")) {
+                if (!dataType.matches("VARCHAR\\(\\d+\\)")) {
                     errorLabel2.setText("Invalid data type: " + atributeData[1] + " from " +contador + " Atribute" );
                     changeOpacityOnAndOff(errorLabel2);
                 }
