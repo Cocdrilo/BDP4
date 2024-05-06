@@ -67,12 +67,9 @@ public class Borrado {
 
     @FXML
     protected void onUpdateButton() {
-        String tableName = tableNameField.getText();
-        String columnNameToUpdate = columnNameToUpdateField.getText();
         String newValue = newValueField.getText();
-        String columnNameToIdentify = columnNameToIdentifyField.getText();
-        String identifierValue = identifierValueField.getText();
-        boolean result = JDBC.updatePhoneNumber(tableName, columnNameToUpdate, newValue, columnNameToIdentify, identifierValue);
+        String idValue = identifierValueField.getText();
+        boolean result = JDBC.updatePhoneNumber(newValue, idValue);
         if (result) {
             changeOpacityOnAndOff(succesLabel);
         } else {

@@ -104,6 +104,8 @@ public class JDBC {
 
 
     public static void main(String[] args) {
+        JDBC.updatePhoneNumber("5551234", "122"); // Esto actualizará el teléfono del dato con id igual a 123 en la tabla "persona" a "555-1234".
+
     }
 
     public static void createTable(String nombre, ArrayList<String> atributos) {
@@ -143,7 +145,6 @@ public class JDBC {
         }
     }
 
-    //funcion para devolver las tablas y sus atributos
 
 
     //funcion para devolver las tablas y sus atributos
@@ -259,20 +260,20 @@ public class JDBC {
     }
 
     //funcion para actualizar el telefono de un dato de la tabla persona
-    public static boolean updatePhoneNumber(String tableName, String columnNameToUpdate, Object newValue, String columnNameToIdentify, Object identifierValue) {
+    public static boolean updatePhoneNumber(Object newValue, String idValue) {
         try {
             // Establecer conexión con la base de datos
             Connection connection = DriverManager.getConnection(url_db, user_db, password_db);
 
             // Construir la consulta SQL para actualizar el teléfono
-            String sql = "UPDATE " + tableName + " SET " + columnNameToUpdate + " = ? WHERE " + columnNameToIdentify + " = ?";
+            String sql = "UPDATE persona SET telefono = ? WHERE idPersona = ?";
 
             // Crear la declaración preparada
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             // Establecer los valores de los parámetros
             preparedStatement.setObject(1, newValue);
-            preparedStatement.setObject(2, identifierValue);
+            preparedStatement.setObject(2, idValue);
 
             // Ejecutar la consulta
             int rowsAffected = preparedStatement.executeUpdate();
@@ -283,14 +284,14 @@ public class JDBC {
 
             // Verificar si se actualizaron filas
             if (rowsAffected > 0) {
-                System.out.println("Teléfono actualizado en la tabla '" + tableName + "' exitosamente.");
+                System.out.println("Teléfono actualizado en la tabla 'persona' exitosamente.");
                 return true;
             } else {
-                System.out.println("No se encontraron datos para actualizar en la tabla '" + tableName + "'.");
+                System.out.println("No se encontraron datos para actualizar en la tabla 'persona'.");
                 return false;
             }
         } catch (SQLException e) {
-            System.out.println("Error al actualizar el teléfono en la tabla '" + tableName + "': " + e.getMessage());
+            System.out.println("Error al actualizar el teléfono en la tabla 'persona': " + e.getMessage());
             return false;
         }
     }
