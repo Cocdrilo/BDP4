@@ -30,6 +30,7 @@ public class VisualInterface {
     private Label errorLabel2;
     @FXML
     private Label errorLabel3;
+    @FXML
     private Label succesLabel;
     FadeUtilityClass fader;
 
