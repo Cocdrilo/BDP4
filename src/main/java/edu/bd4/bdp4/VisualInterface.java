@@ -30,6 +30,7 @@ public class VisualInterface {
     private Label errorLabel2;
     @FXML
     private Label errorLabel3;
+    private Label succesLabel;
     FadeUtilityClass fader;
 
     public VisualInterface() {
@@ -43,6 +44,7 @@ public class VisualInterface {
         ArrayList <String> Tabla = generateAtributesArrayList();
         checkAtributes(Tabla);
         JDBC.createTable(tableNameString, Tabla);
+
     }
 
     private ArrayList<String> generateAtributesArrayList() {
@@ -102,6 +104,8 @@ public class VisualInterface {
                 }
             }
         }
+        succesLabel.setText("Table created successfully.");
+        changeOpacityOnAndOff(succesLabel);
     }
     @FXML
     private void fillTableDefaultValues() {
