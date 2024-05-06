@@ -71,8 +71,10 @@ public class Borrado {
         String idValue = identifierValueField.getText();
         boolean result = JDBC.updatePhoneNumber(newValue, idValue);
         if (result) {
+            succesLabel.setText("Data deleted successfully.");
             changeOpacityOnAndOff(succesLabel);
         } else {
+            errorLabel.setText("Error deleting data.");
             changeOpacityOnAndOff(errorLabel);
         }
     };
