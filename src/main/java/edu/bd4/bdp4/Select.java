@@ -33,6 +33,10 @@ public class Select {
 
     FadeUtilityClass fader;
 
+    public Select() {
+        this.fader = new FadeUtilityClass();
+    }
+
     @FXML
     protected void onFetchUsersButton() {
         String tableName = tableInputField.getText();
