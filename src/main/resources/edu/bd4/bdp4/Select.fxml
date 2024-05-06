@@ -51,5 +51,6 @@
             <Font name="Arial Bold" size="12.0" />
          </font>
       </Label>
+      <Button fx:id="backButton" layoutX="737.0" layoutY="11.0" mnemonicParsing="false" onAction="#backToMain" text="Go Back To Main Screen" />
     </children>
 </AnchorPane>

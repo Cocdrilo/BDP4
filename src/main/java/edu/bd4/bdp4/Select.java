@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import mysqlconnection.JDBC;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Select {
@@ -27,7 +28,10 @@ public class Select {
     private TextArea outputArea;
     @FXML
     private Button fetchUsersButton;
+    @FXML
+    private Button backButton;
 
+    FadeUtilityClass fader;
 
     @FXML
     protected void onFetchUsersButton() {
@@ -55,4 +59,9 @@ public class Select {
             resultsArea.setText("No users found.");
         }
     }
+    @FXML
+    protected void backToMain() throws IOException {
+        fader.fadeNextScene(parentNode,1, "VisualInterface.fxml");
+    }
+
 }

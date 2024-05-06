@@ -82,7 +82,13 @@ public class VisualInterface {
             }
 
             // Check data type
-            if (!Arrays.asList(validDataTypes).contains(atributeData[1].toUpperCase().replaceAll(",", ""))) {
+            String dataType = atributeData[1].toUpperCase().replaceAll(",", "");
+            if (dataType.startsWith("VARCHAR")) {
+                if (!dataType.matches("VARCHAR\\[\\d+\\]")) {
+                    errorLabel2.setText("Invalid data type: " + atributeData[1] + " from " +contador + " Atribute" );
+                    changeOpacityOnAndOff(errorLabel2);
+                }
+            } else if (!Arrays.asList(validDataTypes).contains(dataType)) {
                 errorLabel2.setText("Invalid data type: " + atributeData[1] + " from " +contador + " Atribute" );
                 changeOpacityOnAndOff(errorLabel2);
             }
@@ -95,11 +101,8 @@ public class VisualInterface {
                     break;
                 }
             }
-
-
         }
     }
-
     @FXML
     private void fillTableDefaultValues() {
         ArrayList<String> tablesAndAttributes = JDBC.getTablesAndAttributes();
