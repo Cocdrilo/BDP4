@@ -8,7 +8,7 @@
 
 <AnchorPane fx:id="parentNode" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bd4.bdp4.Borrado">
     <children>
-        <Label layoutX="17.0" layoutY="36.0" text="Borrar Datos de Tablas">
+        <Label layoutX="14.0" layoutY="56.0" text="Borrar Datos de Tablas">
             <font>
                 <Font name="Arial Bold" size="21.0" />
             </font>
@@ -21,21 +21,18 @@
         <Label fx:id="errorLabel" layoutX="263.0" layoutY="170.0" opacity="0.0" prefHeight="49.0" prefWidth="280.0" styleClass="warning" stylesheets="@../../../css/FormularyStyleSheet.css" />
       <TextField fx:id="columnNameField" layoutX="7.0" layoutY="152.0" prefHeight="25.0" prefWidth="110.0" promptText="Nombre Columna" />
       <TextField fx:id="valueField" layoutX="129.0" layoutY="152.0" prefHeight="25.0" prefWidth="110.0" promptText="Dato a Borrar" />
-      <Label layoutX="27.0" layoutY="251.0" text="Actualizar Datos Tablas">
+      <Label layoutX="2.0" layoutY="250.0" text="Actualizar Telefono Tabla Persona">
          <font>
             <Font name="Arial Bold" size="21.0" />
          </font>
       </Label>
-      <TextField fx:id="tableNameField2" layoutX="55.0" layoutY="276.0" promptText="Nombre De Tabla" />
-      <Button layoutX="71.0" layoutY="409.0" mnemonicParsing="false" onAction="#onUpdateButton" text="Update From Table" />
-      <Label layoutX="16.0" layoutY="301.0" prefHeight="17.0" prefWidth="113.0" text="Columna a Identificar" />
-      <Label layoutX="149.0" layoutY="301.0" prefHeight="17.0" prefWidth="89.0" text="Dato a Borrar" />
+      <Button layoutX="84.0" layoutY="342.0" mnemonicParsing="false" onAction="#onUpdateButton" text="Update From Table" />
+      <Label layoutX="9.0" layoutY="283.0" prefHeight="17.0" prefWidth="149.0" text="Id Persona a cambiar Tlfno" />
+      <Label layoutX="183.0" layoutY="283.0" prefHeight="17.0" prefWidth="110.0" text="Nuevo Teléfono" />
       <Label fx:id="succesLabel1" layoutX="273.0" layoutY="306.0" opacity="0.0" prefHeight="49.0" prefWidth="280.0" styleClass="success" stylesheets="@../../../css/FormularyStyleSheet.css" />
       <Label fx:id="errorLabel1" layoutX="273.0" layoutY="385.0" opacity="0.0" prefHeight="49.0" prefWidth="280.0" styleClass="warning" stylesheets="@../../../css/FormularyStyleSheet.css" />
-      <TextField fx:id="columnNameToIdentifyField" layoutX="17.0" layoutY="318.0" prefHeight="25.0" prefWidth="110.0" promptText="Nombre Columna" />
-      <TextField fx:id="columnNameToUpdateField" layoutX="139.0" layoutY="318.0" prefHeight="25.0" prefWidth="110.0" promptText="Dato a Borrar" />
-      <TextField fx:id="identifierValueField" layoutX="17.0" layoutY="355.0" prefHeight="25.0" prefWidth="110.0" promptText="Valor a Identificar" />
-      <TextField fx:id="newValueField" layoutX="139.0" layoutY="355.0" prefHeight="25.0" prefWidth="110.0" promptText="Nuevo Valor" />
+      <TextField fx:id="identifierValueField" layoutX="16.0" layoutY="305.0" prefHeight="25.0" prefWidth="110.0" promptText="Id Persona" />
+      <TextField fx:id="newValueField" layoutX="173.0" layoutY="305.0" prefHeight="25.0" prefWidth="110.0" promptText="Nuevo Teléfono" />
       <Button fx:id="goShowScreen" layoutX="700.0" layoutY="15.0" mnemonicParsing="false" onAction="#goShowScreen" prefHeight="67.0" prefWidth="186.0" text="Go Selects Screen" />
     </children>
 </AnchorPane>
