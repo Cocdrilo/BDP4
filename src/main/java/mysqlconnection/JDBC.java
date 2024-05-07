@@ -14,98 +14,8 @@ public class JDBC {
     public static String user_db = "agenda";
     public static String password_db = "agenda";
 
-    public static boolean register(String username, String lastname, String email, String userpassword) {
-        try {
-
-            if (!checkUser(username)) {
-                Connection connection = DriverManager.getConnection(url_db, user_db, password_db);
-
-                PreparedStatement insertUser = connection.prepareStatement(
-                        "INSERT INTO USERS(username, lastname, email, password) VALUES(?,?,?,?)"
-                );
-
-                insertUser.setString(1, username);
-                insertUser.setString(2, lastname);
-                insertUser.setString(3, email);
-                insertUser.setString(4, userpassword);
-
-                insertUser.executeUpdate();
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(System.err);
-        }
-        return false;
-    }
-
-    public static boolean checkUser(String email) {
-        try {
-            Connection connection = DriverManager.getConnection(url_db, user_db, password_db);
-
-            PreparedStatement checkUserExists = connection.prepareStatement(
-                    "SELECT * FROM USERS WHERE EMAIL = ?"
-            );
-            checkUserExists.setString(1, email);
-
-            ResultSet resultSet = checkUserExists.executeQuery();
-
-            if (!resultSet.isBeforeFirst()) {
-                return false;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(System.err);
-        }
-
-        return true;
-    }
-
-    public static boolean validateLogin(String email, String userpassword) {
-        try {
-            Connection connection = DriverManager.getConnection(url_db, user_db, password_db);
-
-            PreparedStatement validateUser = connection.prepareStatement(
-                    "SELECT * FROM USERS WHERE EMAIL = ? AND PASSWORD = ?"
-            );
-
-            validateUser.setString(1, email);
-            validateUser.setString(2, userpassword);
-
-            ResultSet resultSet = validateUser.executeQuery();
-
-            if (!resultSet.isBeforeFirst()) {
-                return false;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(System.err);
-        }
-        return true;
-    }
-
-    public static String getUser(String email) {
-        try {
-            Connection connection = DriverManager.getConnection(url_db, user_db, password_db);
-
-            PreparedStatement getUser = connection.prepareStatement(
-                    "SELECT * FROM USERS WHERE EMAIL = ?"
-            );
-            getUser.setString(1, email);
-
-            ResultSet resultSet = getUser.executeQuery();
-
-            if (resultSet.next()) {
-                String username = resultSet.getString("username");
-                return username;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(System.err);
-        }
-        return null;
-    }
-
-
     public static void main(String[] args) {
-        JDBC.updatePhoneNumber("5551234", "122"); // Esto actualizará el teléfono del dato con id igual a 123 en la tabla "persona" a "555-1234".
-
+    
     }
 
     public static void createTable(String nombre, ArrayList<String> atributos) {
@@ -144,7 +54,6 @@ public class JDBC {
             System.out.println("Error al crear la tabla: " + e.getMessage());
         }
     }
-
 
 
     //funcion para devolver las tablas y sus atributos
