@@ -10,14 +10,19 @@ import java.time.LocalDate;
 
 public class JDBC {
 
+    // URL de la base de datos
     public static String url_db = "jdbc:mysql://localhost:3306/agenda";
+    // Usuario de la base de datos
     public static String user_db = "agenda";
+    // Contraseña de la base de datos
     public static String password_db = "agenda";
 
+    // Método principal
     public static void main(String[] args) {
-    
+
     }
 
+    // Función para crear una tabla en la base de datos
     public static void createTable(String nombre, ArrayList<String> atributos) {
         try {
             // Establecer conexión con la base de datos
@@ -32,15 +37,16 @@ public class JDBC {
             // Crear una sentencia SQL para crear la tabla
             Statement sentencia = conexion.createStatement();
 
-
             // Definir la sentencia SQL para crear la tabla
             String sql = "CREATE TABLE IF NOT EXISTS " + nombre + " ("
                     + atributosString
                     + ")";
 
+            // Imprimir los atributos para depuración
             for (int i = 0; i < atributos.size(); i++) {
                 System.out.println(atributos.get(i));
             }
+
             // Ejecutar la sentencia SQL
             sentencia.executeUpdate(sql);
 
@@ -55,8 +61,7 @@ public class JDBC {
         }
     }
 
-
-    //funcion para devolver las tablas y sus atributos
+    // Función para obtener información sobre las tablas y sus atributos
     public static ArrayList<String> getTablesAndAttributes() {
         ArrayList<String> tablesInfo = new ArrayList<>();
 
@@ -93,7 +98,7 @@ public class JDBC {
         return tablesInfo;
     }
 
-    //funcion para insertar un dato concreto en una tabla concreta
+    // Función para insertar datos en una tabla
     public static boolean insertData(String tableName, ArrayList<String> data) {
         try {
             // Establecer conexión con la base de datos
@@ -132,7 +137,7 @@ public class JDBC {
         }
     }
 
-    //funcion para borrar un dato de la tabla persona
+    // Función para eliminar datos de una tabla
     public static boolean deleteData(String tableName, String columnName, Object value) {
         try {
             // Establecer conexión con la base de datos
@@ -168,7 +173,7 @@ public class JDBC {
         }
     }
 
-    //funcion para actualizar el telefono de un dato de la tabla persona
+    // Función para actualizar el teléfono de un dato en la tabla persona
     public static boolean updatePhoneNumber(Object newValue, String idValue) {
         try {
             // Establecer conexión con la base de datos
@@ -205,7 +210,7 @@ public class JDBC {
         }
     }
 
-    //funcion para mostrar todos los nombre que empiecen por "A"
+    // Función para obtener los nombres de usuario que empiezan por "A"
     public static List<String> getUsersWithNamesStartingWithA(String tableName) {
         List<String> users = new ArrayList<>();
         try {
@@ -236,7 +241,7 @@ public class JDBC {
         return users;
     }
 
-    //funcion para mostrar los nombres que empiecen por c y esten en un departamento dado
+    // Función para obtener los nombres de usuario que empiezan por "C" y pertenecen a un departamento dado
     public static List<String> getUsersWithNamesStartingWithCAndDepartment(String tableName, String departmentName) {
         List<String> users = new ArrayList<>();
         try {
@@ -270,7 +275,4 @@ public class JDBC {
         }
         return users;
     }
-
-
 }
-
